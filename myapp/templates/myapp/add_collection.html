@@ -1,0 +1,73 @@
+{% extends 'main.html' %}   
+
+{% block title %} 
+<title>Profile</title> 
+{% endblock %}
+
+{% block content %}
+<form action="" method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+
+    <div class="illustration-field">
+        <label for="illustration">Upload Illustration</label>
+        <br>
+        {{ illustration_form.image }}
+    </div>
+
+    <div class="illustration-field">
+        <label for="illustration_name">Illustration Title</label>
+        <br>
+        {{ illustration_form.name }}
+    </div>
+
+    <div class="illustration-field">
+        <label for="illustration_tags">Illustration Tags</label>
+        <br>
+        {{ illustration_form.tags }}
+    </div>
+
+    <div class="illustration-field">
+        <label for="collection">Collection</label>
+        <input type="text" name="collection" list="collection-list">
+        <datalist id="collection-list">
+            {% for collection in collections %}
+            <option value="{{ collection.title }}">{{ collection.title }}</option>
+            {% endfor %}
+        </datalist>
+    </div>
+
+    <div class="illustration-field">
+        <label for="tools">Tools</label>
+        <input type="text" name="tools" list="tools-list">
+        <datalist id="tools-list">
+            {% for tool in tools %}
+            <option value="{{ tool.name }}">{{ tool.name }}</option>
+            {% endfor %}
+        </datalist>
+    </div>
+
+    <div class="illustration-field">
+        <label for="is_favorite">Select if it is Favorite To Show on The Main Page</label>
+        {{ form.is_favorite }}
+    </div>
+
+    <div class="illustration-field">
+        <label for="description">Description</label>
+        {{ form.description }}
+    </div>
+
+    <div class="illustration-field">
+        <label for="title">Title</label>
+        {{ form.title }}
+    </div>
+
+    <div class="illustration-field">
+        <label for="pdf_file">File</label>
+        <br>
+        {{ illustration_form.file }}
+    </div>
+
+    <br>
+    <input type="submit" value="Create New Item">
+</form>
+{% endblock %}
