@@ -1,0 +1,38 @@
+
+
+{% extends 'main.html' %}   
+ 
+{% load static %}
+
+{% block title %} <title>Collection Details</title> {% endblock %}
+
+{% block content %}
+
+
+<div class="collection-detail-container">
+    <div class="collection-details-info">
+             <div>
+                 <h1>
+                   {{collection.name.upper}}
+                 </h1>
+             </div>
+            
+             
+             <a href="{% url 'collections' %}" class="close-btn">
+                 <img src=" {% static 'files/icons/close.svg' %} " alt="">
+             </a>
+    </div>
+
+<ul class="collection-detail-container-images">
+        {% for illustration in collection.illustrations.all %}
+             <li class="collection-detail-images">
+                <img src="{{illustration.image.url}}" alt="illustrations" class="image">
+                
+             </li>
+        {% endfor %}
+
+</ul>
+   
+</div>
+
+{% endblock %}

@@ -8,7 +8,7 @@ admin.site.register(Tools)
 admin.site.register(Illustration)
 
 class CollectionAdmin(admin.ModelAdmin):
-    list_display = ('title', 'is_favorite')
+    list_display = ('name', 'is_favorite')
     list_filter = ('is_favorite', )
 
 admin.site.register(Collections, CollectionAdmin)

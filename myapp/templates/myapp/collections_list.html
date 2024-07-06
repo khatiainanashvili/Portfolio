@@ -1,0 +1,63 @@
+
+{% extends 'main.html' %}   
+ 
+{% block title %} <title>Home</title> {% endblock %}
+
+
+
+{% block content %}
+
+  
+      <h1>
+       Collections
+      </h1>
+
+
+    
+
+      <ul class="collection" >
+       {% for collection in collections %}
+       <a href="{% url 'collection_detail' collection.id %}">
+       <li>
+           <div class="">
+         
+            <ul class="{% if collection.illustrations.all|length >= 5 %}
+              collection_container show-phseudoelement
+              else
+              collection_container
+              {% endif %}">
+            <li class="">
+              {% for illustration in collection.illustrations.all|slice:":4" %}
+                <img src="{{illustration.image.url}}" alt="">
+              {% endfor %}
+              
+            </li>
+            
+            {% if collection.illustrations.all|length > 4 %}
+           <span class="more">
+             +  {{ collection.illustrations.all|length|add:"-4" }}
+           </span>
+           {% endif %}
+          
+           </ul>
+           
+           </div>
+
+           <div class="collection-details">
+
+           
+           <h3>
+            
+                {{ collection.name }}
+        
+           </h3>
+           <p>
+            {{ collection.description }}
+           </p>
+          </div>
+           </li>
+          </a>
+           {% endfor %}
+      </ul>
+    </a>
+{% endblock %}

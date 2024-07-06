@@ -15,25 +15,9 @@
     </div>
 
     <div class="illustration-field">
-        <label for="illustration_name">Illustration Title</label>
-        <br>
-        {{ illustration_form.name }}
-    </div>
-
-    <div class="illustration-field">
         <label for="illustration_tags">Illustration Tags</label>
         <br>
         {{ illustration_form.tags }}
-    </div>
-
-    <div class="illustration-field">
-        <label for="collection">Collection</label>
-        <input type="text" name="collection" list="collection-list">
-        <datalist id="collection-list">
-            {% for collection in collections %}
-            <option value="{{ collection.title }}">{{ collection.title }}</option>
-            {% endfor %}
-        </datalist>
     </div>
 
     <div class="illustration-field">
@@ -47,18 +31,26 @@
     </div>
 
     <div class="illustration-field">
+
+        <label for="collection_name">Collection Name</label>
+        <input type="text" name="collection_name" list="collection_name">  
+        <datalist id="collection_name">
+          {% for collection in collections %}
+            <option value="{{ collection.name }}">{{ collection.name }}</option>
+            {% endfor %}
+        </datalist>
+            
+    </div>
+
+    <div class="illustration-field">
         <label for="is_favorite">Select if it is Favorite To Show on The Main Page</label>
-        {{ form.is_favorite }}
+        <input type="checkbox" name="is_favorite" id="is_favorite">
     </div>
 
     <div class="illustration-field">
         <label for="description">Description</label>
-        {{ form.description }}
-    </div>
-
-    <div class="illustration-field">
-        <label for="title">Title</label>
-        {{ form.title }}
+        <br>
+        <textarea name="description" id="description"></textarea>
     </div>
 
     <div class="illustration-field">

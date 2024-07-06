@@ -2,34 +2,31 @@ from django.db import models # type: ignore
 from django.contrib.auth.models import AbstractUser # type: ignore
 
 
-class Tools(models.Model):
-    name = models.CharField(max_length= 50)
-    def __str__(self):
-        return self.name
-
-
 class Collections(models.Model):
-    title = models.CharField(max_length=100)
+    name = models.CharField(max_length=200)
     description = models.TextField(blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     is_favorite = models.BooleanField(default=False)
     
     def __str__(self):
-        return self.title
+        return self.name
+
+class Tools(models.Model):
+    name = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.name
 
 class Illustration(models.Model):
-    name = models.CharField(max_length=20)
-    collection = models.ForeignKey(Collections, on_delete=models.CASCADE, related_name='illustrations')
-    tools = models.ManyToManyField(Tools, blank=True, related_name="tools")
-    image = models.ImageField(null=True, blank=True)
-    file = models.FileField(null=True)
-    tags = models.CharField(max_length=200)
-    
+    image = models.ImageField(upload_to='illustrations/')
+    name = models.CharField(max_length=200)
+    description = models.TextField(blank=True, null=True)
+    file = models.FileField(upload_to='files/')
+    tool = models.ForeignKey(Tools, on_delete=models.CASCADE)
+    collection = models.ForeignKey(Collections, related_name='illustrations', on_delete=models.CASCADE)
+
     def __str__(self):
-        return f"{self.name} - {self.collection.title}"
-
-
-
+        return self.name
 
 class User(AbstractUser):
     collections = models.ManyToManyField(Collections, blank= True, related_name="myapp_user")

@@ -19,7 +19,7 @@ def illustration_list(request):
     illustrations = Illustration.objects.all()
     return render(request, 'myapp/illustrations_list.html', {'illustrations': illustrations})
 
-def collection_list(request):
+def collections_list(request):
     collections = Collections.objects.all()
     return render(request, 'myapp/collections_list.html', {'collections': collections})
 
@@ -29,11 +29,6 @@ def collection_details(request, id):
 
 
 
-
-
-def about(request):
-    return render(request, 'myapp/about.html')
-
 def contact(request):
     return render(request, "myapp/contact.html")
 
@@ -41,9 +36,6 @@ def contact(request):
 @login_required(login_url='/login/')
 def profile(request, id):
     user = User.objects.get(id=int(id))
-    
-    # birds = user.birds.all()
-
     headline= "My Favorite Birds"
     context = {"user": user, "headline": headline}
     return render(request, "myapp/profile.html", context)
@@ -75,40 +67,35 @@ def login_page(request):
     context = {'page': page}
     return render(request, 'myapp/login_register.html', context)
 
-
+@login_required(login_url='/login/')
 def add_collection(request):
     form = CollectionForm()
     illustration_form = IllustrationForm()
     collections = Collections.objects.all()
     tools = Tools.objects.all()
-    tool_form= ToolsForm()
-   
+
     if request.method == 'POST':
-        collection_title = request.POST.get('title')
+        collection_name = request.POST.get('collection_name')
         collection_description = request.POST.get('description')
-        collection_is_favorite = request.POST.get('is_favorite')
-        illustration_tools = request.POST.get('tool')
-        collection = request.POST.get('collection')
-
-
-        title, created = Collections.objects.get_or_create(title=collection_title)
-        description, created = Collections.objects.get_or_create(description=collection_description)
-        is_favorite, created = Collections.objects.get_or_create(is_favorite=collection_is_favorite)
-        tool, created = Collections.objects.get_or_create(name=illustration_tools )
-
-        form = CollectionForm(request.POST)
-        illustration_form = IllustrationForm(request.POST)
-        tool_form= ToolsForm(request.POST)
-
-        new_collection = Collections(title=title, description=description, is_favorite=is_favorite )
-        new_collection.save()
-
-        new_illustration = Illustration(image=request.FILES['image'])
+        collection_is_favorite = True if request.POST.get('is_favorite') == "on" else False
+        illustration_tool_name = request.POST.get('tools')
         
+        collection, created = Collections.objects.get_or_create(name=collection_name, description = collection_description, is_favorite = collection_is_favorite)
+
+        tool, created = Tools.objects.get_or_create(name=illustration_tool_name)
+
+        new_illustration = Illustration(
+            image=request.FILES.get('image'),
+            name=illustration_form.data.get('name', ''),
+            tool=tool,
+            description=illustration_form.data.get('description', ''),
+            file=request.FILES.get('file'),
+            collection=collection
+        )
+
         new_illustration.save()
-        new_illustration.add(tool)
+
         return redirect('home')
-        
+
     context = {'form': form, 'illustration_form': illustration_form, 'tools': tools, 'collections': collections}
     return render(request, 'myapp/add_collection.html', context)
-
