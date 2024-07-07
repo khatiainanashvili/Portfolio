@@ -5,19 +5,29 @@ from django.db.models import Q # type: ignore
 from django.contrib.auth import authenticate, login # type: ignore
 from django.contrib.auth.decorators import login_required # type: ignore
 from .forms import CollectionForm, IllustrationForm, ToolsForm
+from .seeder import seeder_func
+from django.contrib import messages
 # Create your views here.
 
 def home(request):
     favorite_collections = Collections.objects.filter(is_favorite=True)[:3]
-    query = request.GET.get('query', "")
+    
+    seeder_func()
     illustrations = Illustration.objects.filter(collection__in=favorite_collections)
     return render(request, 'myapp/home.html', {'favorite_collections': favorite_collections, 'illustrations': illustrations})
 
 
 
-def illustration_list(request):
-    illustrations = Illustration.objects.all()
-    return render(request, 'myapp/illustrations_list.html', {'illustrations': illustrations})
+def illustrations_list(request):
+    query = request.GET.get('query', "")
+    tools = Tools.objects.all()
+    illustrations = Illustration.objects.filter(Q(tool__name__icontains=query))
+    return render(request, 'myapp/illustrations_list.html', {'illustrations': illustrations, "tools": tools})
+
+def illustration_detail(request, id):
+    illustration = get_object_or_404(Illustration, id=id)
+  
+    return render(request, 'myapp/illustration_detail.html', {'illustration': illustration})
 
 def collections_list(request):
     collections = Collections.objects.all()
@@ -25,8 +35,25 @@ def collections_list(request):
 
 def collection_details(request, id):
     collection = get_object_or_404(Collections, id=id)
-    return render(request, 'myapp/collection_detail.html', {'collection': collection})
+    illustration = get_object_or_404(Illustration, id=id)
+    return render(request, 'myapp/collection_detail.html', {'collection': collection, "illustration": illustration})
 
+
+def delete_collection(request, id):
+    collection = Collections.objects.get(id=id)
+    user = request.user
+    if request.method == 'POST':
+        collection.delete()
+        return redirect('collections')
+    return render(request, "myapp/delete_collection.html", {'collection': collection, "user": user})
+
+def delete_illustration(request, id):
+    illustration = Illustration.objects.get(id=id)
+    user = request.user
+    if request.method == 'POST':
+        illustration.delete()
+        return redirect('illustrations')
+    return render(request, "myapp/delete_illustration.html", {'illustration': illustration, "user": user})
 
 
 def contact(request):
@@ -54,15 +81,15 @@ def login_page(request):
         try:
             user = User.objects.get(username=username)
         except User.DoesNotExist:
-            pass
+            messages.error(request, "Username doesn't exit")
 
         user = authenticate(request, username=username, password=password)
         if user is not None:
             login(request, user)
             return redirect('home')
         else:
-
-            pass
+            messages.error(request, "User or Password is Incorrect")
+            
 
     context = {'page': page}
     return render(request, 'myapp/login_register.html', context)
@@ -89,7 +116,6 @@ def add_collection(request):
             name=illustration_form.data.get('name', ''),
             tool=tool,
             description=illustration_form.data.get('description', ''),
-            file=request.FILES.get('file'),
             collection=collection
         )
 

@@ -13,7 +13,7 @@
 
 </div>
       <h1>
-        welcome to my portfolio
+        ⋆.˚🦋༘⋆  welcome to my portfolio ⋆༘🦋˚.⋆
       </h1>
       <ul >
        {% for collection in favorite_collections %}
@@ -23,7 +23,7 @@
            <ul class="carucell-container" >
             <li class="container">
               {% for illustration in collection.illustrations.all %}
-                <div class="panel active" style="background-image: url({{illustration.image.url}}) ;">
+                <div class="panel " style="background-image: url({{illustration.image.url}}) ;">
                     <h3>{{ illustration.tools.all }}</h3>
                 </div>
               {% endfor %}

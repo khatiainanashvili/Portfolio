@@ -1,0 +1,18 @@
+{% extends 'main.html' %}
+
+{% block title %} <title>Delete Illustration</title> {% endblock %}
+
+{% block content %}
+        <form method="POST" action="">
+            {% csrf_token %}
+              <p>
+                R U sure, you want to delete This Item ?
+              </p>
+              <input type="submit">
+        </form>
+       
+        <a href="{% url 'illustration_detail' illustration.id %}">
+            Go Back
+        </a>
+       
+{% endblock %}

@@ -12,21 +12,18 @@
        Collections
       </h1>
 
-
+<div class="collection-list-container">
     
-
+     {% for collection in collections %}
+     {% if collection.illustrations.all|length != 0 %}
       <ul class="collection" >
-       {% for collection in collections %}
+       
        <a href="{% url 'collection_detail' collection.id %}">
        <li>
            <div class="">
          
-            <ul class="{% if collection.illustrations.all|length >= 5 %}
-              collection_container show-phseudoelement
-              else
-              collection_container
-              {% endif %}">
-            <li class="">
+            <ul class="collection_container ">
+            <li class="collection-images">
               {% for illustration in collection.illustrations.all|slice:":4" %}
                 <img src="{{illustration.image.url}}" alt="">
               {% endfor %}
@@ -44,10 +41,7 @@
            </div>
 
            <div class="collection-details">
-
-           
            <h3>
-            
                 {{ collection.name }}
         
            </h3>
@@ -57,7 +51,15 @@
           </div>
            </li>
           </a>
-           {% endfor %}
-      </ul>
+
+          {% if request.user.is_authenticated %}
+             <a href="{% url 'delete_collection' collection.id %}">Delete Collection</a> 
+          {% endif %} 
+          
+      </ul> 
+      {% endif %}
+      {% endfor %}
     </a>
+
+  </div>
 {% endblock %}

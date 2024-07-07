@@ -1,10 +1,17 @@
 {% extends 'main.html' %}   
 
+{% load static %}
+
 {% block title %} 
 <title>Profile</title> 
 {% endblock %}
 
 {% block content %}
+<div class="add-new-item">
+
+    <a href="{% url 'profile' request.user.id  %}" class="close-btn">
+        <img src=" {% static 'files/icons/close.svg' %} " alt="">
+    </a>
 <form action="" method="POST" enctype="multipart/form-data">
     {% csrf_token %}
 
@@ -53,13 +60,10 @@
         <textarea name="description" id="description"></textarea>
     </div>
 
-    <div class="illustration-field">
-        <label for="pdf_file">File</label>
-        <br>
-        {{ illustration_form.file }}
-    </div>
 
     <br>
     <input type="submit" value="Create New Item">
 </form>
+
+</div>
 {% endblock %}

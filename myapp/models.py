@@ -21,12 +21,11 @@ class Illustration(models.Model):
     image = models.ImageField(upload_to='illustrations/')
     name = models.CharField(max_length=200)
     description = models.TextField(blank=True, null=True)
-    file = models.FileField(upload_to='files/')
     tool = models.ForeignKey(Tools, on_delete=models.CASCADE)
     collection = models.ForeignKey(Collections, related_name='illustrations', on_delete=models.CASCADE)
 
     def __str__(self):
-        return self.name
+        return f"{self.name} _ {self.tool} _ {self.description}"
 
 class User(AbstractUser):
     collections = models.ManyToManyField(Collections, blank= True, related_name="myapp_user")
