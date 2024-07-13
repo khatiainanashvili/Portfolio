@@ -179,8 +179,6 @@ def update_user(request):
 
 
 @superuser_required
-
-
 def update_collection(request, collection_id):
     collection = get_object_or_404(Collections, id=collection_id)
     collection_form = CollectionUpdateForm(instance=collection)
