@@ -10,30 +10,51 @@
 
 
 <div class="collection-detail-container">
-    <div class="collection-details-info">
-             <div>
-                 <h1>
-                   {{collection.name.upper}}
-                 </h1>
-             </div>
-            
-             
+     
              <a href="{% url 'collections' %}" class="close-btn">
                  <img src=" {% static 'files/icons/close.svg' %} " alt="">
              </a>
-    </div>
+    
 
 <ul class="collection-detail-container-images">
         {% for illustration in collection.illustrations.all %}
-            
              <li class="collection-detail-images">
-                <img src="{{illustration.image.url}}" alt="illustrations" class="image">
+                <img src="{{illustration.image.url}}" alt="illustrations">
                 
              </li>
         {% endfor %}
 
 </ul>
+
+
+
+<div class="collection-details-info">
+    <div >
+        <h1>
+          {{collection.name.upper}}
+        </h1>
+        <p>
+    {{collection.description}}
+    </p>
+
+    <h4>Tools: {{illustration.tool}}</h4>
+      
+    </div>
+<div class="">
+    {% if request.user.is_authenticated %}
+<a href="{% url 'delete_collection' collection.id %}"class="delete-illustration delete">Delete Collection</a> 
+{% endif %}
+ </div>
    
+
+</div>    
+
+<a href="{% url 'update_collection' collection.id %}">Update collection</a>
+
 </div>
+
+
+
+
 
 {% endblock %}

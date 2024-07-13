@@ -1,42 +1,74 @@
 {% extends 'main.html' %}
 
+ 
+{% load static %}
+
 {% block title %} <title>Login/Register Page</title> {% endblock %}
 
 {% block content %}
-       
             {% if page == 'login' %}
             
-               <div class="login-container">
+            <div class="login-container add-new-item" style="flex-direction: column;">
 
+               <a href="{% url 'home' %}" class="close-btn">
+                    <img src=" {% static 'files/icons/close.svg' %} " alt="">
+                </a>
 
-                {% if messages %}
+             <h1>Log In</h1>
 
-                     <ul style="color: red;">
-                      {% for message in messages %}
-                       <li>
-                        {{ message }}
-                       </li>
-                      {% endfor %}
-                     </ul>
+             
+             {% if messages %}
 
-                {% endif %}
+             <ul style="color: red;">
+              {% for message in messages %}
+               <li>
+                {{ message }}
+               </li>
+              {% endfor %}
+             </ul>
 
-                <h1>Log In</h1>
-                      <form method="POST" action="">
-                        {% csrf_token %}
+             {% endif %}
+                   <form method="POST" action="">
+                     {% csrf_token %}
 
-                        <label for="username">Username</label>
-                        <input type="text" name="username" placeholder="Username">
-                        <br><br>
-                        <label for="password">Password</label>
-                        <input type="password" name="password" placeholder="Pasword">
-                        <br><br>
-                        <input type="submit" value="login">
-                        <br><br>
-                    </form>
-               </div>
+                     
+                     <label for="username">Username</label>
+                     <input type="text" name="username" placeholder="Username">
+                     <br><br>
+                     <label for="password">Password</label>
+                     <input type="password" name="password" placeholder="Pasword">
+                     <br><br>
+                     <input type="submit" value="login">
+                     <br><br>
+
+                      <p>Don't have an account? Sign up</p>
+                     <a href="{% url 'register' %}">Sign Up</a>
+                 </form>
+            </div>
 <br>
 
-            {% endif %}
+         {% else %}
+         <div class="register-container add-new-item" style="flex-direction: column;">
+
+          <a href="{% url 'home' %}" class="close-btn">
+               <img src=" {% static 'files/icons/close.svg' %} " alt="">
+           </a>
+
+          <h1>Register Page</h1>
+          <div>
+                <form method="POST" action="">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+      
+                   <input type="submit" value="Register">
+      
+                   <br><br>
+                    <p>Already signed up?</p>
+                    <a href="{% url 'login' %}">Login</a>
+                </form>
+          </div>
+
+         </div>
+         {% endif %}
 
 {% endblock %}

@@ -12,6 +12,11 @@ urlpatterns = [
     path('delete_illustration/<str:id>/', views.delete_illustration, name='delete_illustration'),
     path('delete_collection/<str:id>/', views.delete_collection, name='delete_collection'),
     path('login/', views.login_page, name='login'),
+    path('logout/', views.log_out, name='logout'),
+    path('register/', views.register_page, name='register'),
     path('add/', views.add_collection, name='add'),
+    path('update_user', views.update_user, name = 'update_user'),
+    path('collection/<int:collection_id>/update/', views.update_collection, name='update_collection'),
+
 
 ]

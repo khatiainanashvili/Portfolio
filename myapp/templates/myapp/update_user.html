@@ -1,0 +1,25 @@
+{% extends 'main.html' %}   
+
+{% load static %}
+
+{% block title %} 
+<title>Update User</title> 
+{% endblock %}
+
+{% block content %}
+   
+<a href="{{ request.META.HTTP_REFERER }}">Go Back To Home</a>
+
+<form action="" method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    {% for field in form %}
+        <div class="">
+            <label>{{ field.label }}</label>
+            {{ field }}
+        </div>
+    {% endfor %}
+    <input type="submit" value="Update Profile">
+</form>
+
+
+{% endblock %}

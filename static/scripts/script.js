@@ -1,6 +1,14 @@
 const panels = document.querySelectorAll(".panel");
 let intervalId;
 
+
+document.addEventListener("DOMContentLoaded", function() {
+    if (panels.length > 0) {
+        panels[0].classList.add('active');
+    }
+});
+
+
 panels.forEach(element => {
     element.addEventListener('click', () => {
         removeActiveClasses();
@@ -8,11 +16,14 @@ panels.forEach(element => {
     });
 });
 
+
 function removeActiveClasses() {
     panels.forEach(element => {
         element.classList.remove("active");
     });
 }
+
+const panel = document.querySelector(".active");
 
 function startActivationLoop() {
     let currentIndex = 0;
@@ -31,3 +42,6 @@ const container = document.querySelector(".container");
 
 container.addEventListener('mouseenter', startActivationLoop);
 container.addEventListener('mouseleave', stopActivationLoop);
+
+
+

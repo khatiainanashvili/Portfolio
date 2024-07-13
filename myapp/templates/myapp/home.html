@@ -1,6 +1,8 @@
 
 {% extends 'main.html' %}   
- 
+
+{% load static %}
+
 {% block title %} <title>Home</title> {% endblock %}
 
 
@@ -9,13 +11,16 @@
 
   
 
-<div class="">
-
-</div>
-      <h1>
-        ⋆.˚🦋༘⋆  welcome to my portfolio ⋆༘🦋˚.⋆
-      </h1>
-      <ul >
+<div class="home-page">
+<div class="illustartor">
+  <img src=" {% static 'files/icons/khatia.png' %} " alt="khatia" class="khatia">
+  <img src=" {% static 'files/icons/1.gif' %} " alt="khatia" class="firefly">
+  <h5>
+    Explore my unique digital illustrations, where my creativity and artistry come to life through vivid visuals and captivating designs
+  </h5>
+ 
+</div>    
+      <ul class="carucell" >
        {% for collection in favorite_collections %}
        <li>
           
@@ -45,6 +50,6 @@
       </ul>
 
         
-       
+   </div>    
    
 {% endblock %}

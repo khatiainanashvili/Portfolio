@@ -8,7 +8,7 @@
 {% block content %}
 
   
-      <h1>
+      <h1 style="margin: 1.5em 0;">
        Collections
       </h1>
 
@@ -40,7 +40,7 @@
            
            </div>
 
-           <div class="collection-details">
+           <div class="collection-details" id="collectionDetail">
            <h3>
                 {{ collection.name }}
         
@@ -52,9 +52,7 @@
            </li>
           </a>
 
-          {% if request.user.is_authenticated %}
-             <a href="{% url 'delete_collection' collection.id %}">Delete Collection</a> 
-          {% endif %} 
+        
           
       </ul> 
       {% endif %}

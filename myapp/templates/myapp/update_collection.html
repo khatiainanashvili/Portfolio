@@ -1,0 +1,29 @@
+{% extends 'main.html' %}
+
+{% block title %}
+<title>Update Collection</title>
+{% endblock %}
+
+{% block content %}
+<a href="{{ request.META.HTTP_REFERER }}">Go Back To Home</a>
+
+<h2>Update Collection</h2>
+<form action="" method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ collection_form.as_p }}
+
+    <h3>Update Illustrations</h3>
+    {% for form in illustration_forms %}
+        <div>
+            {{ form.image }}
+            {{ form.tool }}
+        </div>
+    {% endfor %}
+
+    <hr>
+    <h3>Add New Illustration</h3>
+    {{ new_illustration_form.as_p }}
+
+    <input type="submit" name="update_collection" value="Update Collection">
+</form>
+{% endblock %}

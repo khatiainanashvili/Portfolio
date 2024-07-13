@@ -3,11 +3,17 @@
 {% block title %} <title>Delete Collection</title> {% endblock %}
 
 {% block content %}
-        <form method="POST" action="">
+<div class="delete-container">
+        <form method="POST" action="" class="delete_item-form">
             {% csrf_token %}
               <p>
-                R U sure, you want to delete "{{ collection.name }}" ?
+                R U sure, you want to delete "{{ collection.name }}" Collection?
               </p>
               <input type="submit">
         </form>
+
+        <a href="{% url 'collection_detail' collection.id %}" class="go-back">
+          Go Back
+      </a>
+</div>
 {% endblock %}

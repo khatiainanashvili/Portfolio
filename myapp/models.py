@@ -30,3 +30,5 @@ class Illustration(models.Model):
 class User(AbstractUser):
     collections = models.ManyToManyField(Collections, blank= True, related_name="myapp_user")
 
+    avatar = models.ImageField(null=True, default= 'avatar.png' )
+

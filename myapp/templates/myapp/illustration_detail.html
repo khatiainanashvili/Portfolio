@@ -9,27 +9,32 @@
 {% block content %}
 
 
-<div class="collection-detail-container">
-    <div class="collection-details-info">
-             
+<div class="illustartion-detail-container">
+
+    <div class="illustration-heandlers">
         
-             <a href="{% url 'illustrations' %}" class="close-btn">
+             <a href="{% url 'illustrations' %}" class="close-btn close-illustration">
                  <img src=" {% static 'files/icons/close.svg' %} " alt="">
              </a>
-             {% if request.user.is_authenticated %}
-             <a href="{% url 'delete_illustration' illustration.id %}" class="btn btn-danger">DELETE</a> 
-             {% endif %} 
+            
     </div>
+       
 
 <ul class="collection-detail-container-images">
 
-    <li class="detail-images">
-        <img src="{{ illustration.image.url }}" alt="Illustration" class="image">
+    <li class="collection-detail-images" >
+        <img src="{{ illustration.image.url }}" alt="Illustration" class="image illustration-detail-img">
+        <div class="illustration-info">
+          <h3>Tools: {{ illustration.tool }}</h3>
+        {% if request.user.is_authenticated %}
+        <a href="{% url 'delete_illustration' illustration.id %}" class=" delete-illustration delete">Delete image</a> 
+        {% endif %}  
+        </div>
+        
     </li>
 
 
 </ul>
-
 
 
 </div>
