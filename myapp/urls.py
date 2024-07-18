@@ -17,6 +17,5 @@ urlpatterns = [
     path('add/', views.add_collection, name='add'),
     path('update_user', views.update_user, name = 'update_user'),
     path('collection/<int:collection_id>/update/', views.update_collection, name='update_collection'),
-
-
+    path('delete_comment/<str:id>/', views.delete_comment, name='delete_comment')
 ]

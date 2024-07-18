@@ -12,7 +12,7 @@
               <input type="submit">
         </form>
 
-        <a href="{% url 'collection_detail' collection.id %}" class="go-back">
+        <a href="{{ request.META.HTTP_REFERER }}" class="go-back">
           Go Back
       </a>
 </div>

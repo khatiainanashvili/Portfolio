@@ -26,7 +26,7 @@
         <img src="{{ illustration.image.url }}" alt="Illustration" class="image illustration-detail-img">
         <div class="illustration-info">
           <h3>Tools: {{ illustration.tool }}</h3>
-        {% if request.user.is_authenticated %}
+        {% if request.user.is_superuser %}
         <a href="{% url 'delete_illustration' illustration.id %}" class=" delete-illustration delete">Delete image</a> 
         {% endif %}  
         </div>

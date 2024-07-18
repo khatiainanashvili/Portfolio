@@ -26,9 +26,24 @@ class Illustration(models.Model):
 
     def __str__(self):
         return f"{self.name} _ {self.tool} _ {self.description}"
+    
 
 class User(AbstractUser):
     collections = models.ManyToManyField(Collections, blank= True, related_name="myapp_user")
 
     avatar = models.ImageField(null=True, default= 'avatar.png' )
+
+
+class Comment(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    collection = models.ForeignKey(Collections, on_delete=models.CASCADE)  # Corrected field name
+    body = models.TextField()
+    created = models.DateField(auto_now_add=True)
+
+    class Meta:
+        ordering = ['-created']
+
+    def __str__(self):
+        return self.body
+
 

@@ -51,8 +51,23 @@
           </div>
            </li>
           </a>
-
-        
+          {% if request.user.is_superuser %}
+          <div class="settings">
+            <div class="settings-heandler ">
+              <span class="material-icons md-light">settings</span>
+              <span class="material-icons md-light">arrow_drop_down</span>
+            </div>
+            <ul class="collection-settings">
+              <span class="material-icons md-light">arrow_drop_up</span>
+              <li>
+                <a href="{% url 'update_collection' collection.id %}">Edit</a>
+              </li>
+              <li>
+                <a href="{% url 'delete_collection' collection.id %}" class="">Delete</a> 
+              </li>
+            </ul>
+          </div>
+        {% endif %}
           
       </ul> 
       {% endif %}

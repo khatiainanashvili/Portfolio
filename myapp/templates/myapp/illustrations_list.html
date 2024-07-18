@@ -20,16 +20,19 @@
 {% endfor %}
 </div>
 
-<div class="photo-gallery">
+<div class="grid-container">
 
               {% for illustration in illustrations %}
-              <div class="photo-column">
-                <a href="{% url 'illustration_detail' illustration.id %}">
-                <img src="{{illustration.image.url}}" alt="illustration">
-              </a>
-              </div>
+              
+                <a href="{% url 'illustration_detail' illustration.id %}"   class="grid-item">
+                
+                    <img src="{{illustration.image.url}}" alt="illustration">
+          
+               </a>
+              
                 
               {% endfor %}
+        
         
    </div>       
    
