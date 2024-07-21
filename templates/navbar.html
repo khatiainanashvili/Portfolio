@@ -1,11 +1,15 @@
-{% load static %}
-<nav class="navbar navbar-expand-lg bg-body-tertiary">
 
+{% load static %}
+
+
+  <nav class="navbar navbar-expand-lg bg-body-tertiary">
     <div class="container-fluid">
-   
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+      <button class="nav-dropdown" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="material-icons md-light">menu</span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNavDropdown" style="z-index: 100000000 !important;">
+        <ul class="navbar-nav">
+
           <li class="nav-item">
             <a class="nav-link active" aria-current="page" href="{% url 'home' %}">❀ Home ❀</a>
           </li>
@@ -20,6 +24,7 @@
           <li class="nav-item">
             <a class="nav-link active" aria-current="page" href="{% url 'contact' %}">ʚɞ Contact ʚɞ</a>
           </li>
+
           {% if request.user.is_authenticated %}
           
           {%if  request.user.is_superuser %}
@@ -27,17 +32,26 @@
                   <a class="nav-link active" aria-current="page" href="{% url 'profile' request.user.id %}">☘︎ Profile ☘︎</a>
                 </li>
           {% endif %}
-                <li class="nav-item">
-                  <a class="nav-link active" aria-current="page" href="{% url 'logout'%}">LogOut</a>
-                </li>
+               
+               
+          <div class="dropdown">
 
-                <div class="" >
-                  <a href="{% url 'profile' request.user.id %}" style="display: flex; align-items: center; gap:1em;">
-                   <img src="{{ request.user.avatar.url }}" alt="" style="width: 2.5em; height: 2.5em; border-radius: 100%;">
-                   <span>{{request.user.username}}</span>
-                   
-                  </a>
-               </div>
+            <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false" >
+              <img src="{{ request.user.avatar.url }}" alt="" style="width: 2.5em; height: 2.5em; border-radius: 100%;">
+              <p>{{request.user.username}} <span class="material-icons md-light">arrow_drop_down</span> </p>
+            </a>
+
+            <div class="dropdown-menu">
+           
+              <a  href="{% url 'update' %}">settings <span class="material-icons md-light">psychology</span></a>
+          
+              <a  href="{% url 'logout' %}">LogOut <span class="material-icons md-light">logout</span></a>
+          
+          
+              
+            </div>
+
+          </div>
               {% else %}
               <li class="nav-item">
                 <a class="nav-link active" aria-current="page" href="{% url 'login'%}">LogIn</a>
@@ -45,7 +59,34 @@
             
 
           {% endif %}
+
+          
         </ul>
       </div>
     </div>
   </nav>
+
+
+  <script>
+
+const userDropdown = document.querySelectorAll('.dropdown');
+const userHeandler = document.querySelector('.dropdown-menu');
+const navbarNavDropdown = document.querySelector('.navbar-collapse')
+const navDropdown = document.querySelector('.nav-dropdown')
+ 
+userDropdown.forEach(element => {
+
+element.addEventListener('click', ()=>{
+    userHeandler.classList.toggle('active')
+    console.log("works");
+   
+}
+)
+
+});
+
+navDropdown.addEventListener('click', () => {
+  navbarNavDropdown.classList.toggle('active')
+})
+
+  </script>

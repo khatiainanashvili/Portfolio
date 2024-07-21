@@ -10,10 +10,11 @@
                 R U sure, you want to delete this Comment?
                 <span>{{ comment }}</span>
               </p>
-              <input type="submit">
+              <input type="submit" class="add-file-btn">
         </form>
 
         <a href="{{ request.META.HTTP_REFERER }}" class="go-back">
+          <span class="material-icons md-light">arrow_back</span>
           Go Back
       </a>
 </div>

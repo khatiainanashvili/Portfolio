@@ -94,12 +94,12 @@ def delete_illustration(request, id):
 
 
 def delete_comment(request, id):
-   
     user = request.user
-    comment = Comment.objects.get(id=id)
+    comment = get_object_or_404(Comment, id=id)
+    # collection = comment.collection
     if request.method == 'POST':
         comment.delete()
-        return redirect('collections')
+        return redirect('collection_detail', id=comment.collection.id)
     return render(request, "myapp/delete_comment.html", {'comment': comment, "user": user})
 
 
@@ -139,7 +139,7 @@ def login_page(request):
             messages.error(request, "User or Password is Incorrect")
             
     context = {'page': page}
-    return render(request, 'myapp/login_register.html', context)
+    return render(request, 'myapp/login.html', context)
 
 
 
@@ -160,9 +160,11 @@ def register_page(request):
             user.save()
             login(request, user)
             return redirect('home')
+        else:
+            messages.error(request, message=messages.error)
 
     context = {'form': form}
-    return render(request, 'myapp/login_register.html', context)
+    return render(request, 'myapp/register.html', context)
 
 
 @superuser_required

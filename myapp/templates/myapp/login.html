@@ -1,0 +1,64 @@
+{% extends 'main.html' %}
+
+ 
+{% load static %}
+
+{% block title %} <title>Login/Register Page</title> {% endblock %}
+
+{% block content %}
+        
+{% if page == 'login' %}
+         <div class="frame">
+         
+
+            <a href="{% url 'home' %}" class="close-btn">
+                <img src=" {% static 'files/icons/close.svg' %} " alt="">
+            </a>
+
+
+            <div class="login">Login</div>
+
+            {% if messages %}
+
+            <ul style="color: red;">
+             {% for message in messages %}
+              <li>
+               {{ message }}
+              </li>
+             {% endfor %}
+            </ul>
+
+            {% endif %}
+
+
+
+            <form method="POST" action="">
+                {% csrf_token %}
+
+                <div class="email">
+                    <input type="text" name="username" placeholder="Username">
+                    <span class="material-icons md-light">person</span>
+                </div>
+               
+                <div class="password">
+                    <input type="password" name="password" placeholder="Pasword">
+                    <span class="material-icons md-light">password</span>
+                </div>
+                
+                <input type="submit" value="login" class="log">
+        
+                <div class="reg"></div>
+                 <p>Don't have an account? Sign up</p>
+                <a href="{% url 'register' %}">Sign Up</a>
+            </form>
+       
+
+        </div>
+        </div>
+
+
+{% endif %}
+
+
+
+{% endblock %}

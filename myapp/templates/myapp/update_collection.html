@@ -5,7 +5,8 @@
 {% endblock %}
 
 {% block content %}
-<a href="{{ request.META.HTTP_REFERER }}">Go Back To Home</a>
+<div class="delete-container" style="flex-direction: column;">
+<a href="{{ request.META.HTTP_REFERER }}" class="go-back"> <span class="material-icons md-light">arrow_back</span> Go Back</a>
 
 <h2>Update Collection</h2>
 <form action="" method="POST" enctype="multipart/form-data">
@@ -16,6 +17,7 @@
     {% for form in illustration_forms %}
         <div>
             {{ form.image }}
+        
             {{ form.tool }}
         </div>
     {% endfor %}
@@ -24,6 +26,8 @@
     <h3>Add New Illustration</h3>
     {{ new_illustration_form.as_p }}
 
-    <input type="submit" name="update_collection" value="Update Collection">
+    <input type="submit" name="update_collection" value="Update Collection" class="add-file-btn">
 </form>
+
+</div>
 {% endblock %}

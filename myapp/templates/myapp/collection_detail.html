@@ -14,13 +14,11 @@
              <a href="{% url 'collections' %}" class="close-btn">
                  <img src=" {% static 'files/icons/close.svg' %} " alt="">
              </a>
-    
 
 <ul class="collection-detail-container-images">
         {% for illustration in collection.illustrations.all %}
              <li class="collection-detail-images">
-                <img src="{{illustration.image.url}}" alt="illustrations">
-                
+                <img src="{{illustration.image.url}}" alt="illustrations">  
              </li>
         {% endfor %}
 
@@ -40,7 +38,7 @@
     <h4>Tools: {{illustration.tool}}</h4>
       
     </div>
-<div class="">
+<div class="collection-detail-info-settings">
     {% if request.user.is_superuser %}
 <a href="{% url 'update_collection' collection.id %}" class="delete-illustration delete update_collection">Update Collection</a>
 <a href="{% url 'delete_collection' collection.id %}"class="delete-illustration delete">Delete Collection</a>
@@ -55,36 +53,34 @@
     <h2>Comments:</h2>
 
     {% for comment in comments %}
-    <div class="">
+    <div class="comment-body">
         <p>{{ comment.body }}</p>
-
-        
-
+        <div class="comment-info">
         <a href="{% url 'profile' comment.user.id %}">
-        <img src="{{ comment.user.avatar.url }}" alt="" style="width: 2em;">
+        <img src="{{ comment.user.avatar.url }}" alt="" style="width: 2.5em; height: 2.5em;">
         </a>
         <span>{{ comment.created | timesince }}</span>
-        <br> <br>
         {% if request.user == comment.user %} 
         <a href="{% url 'delete_comment' comment.id %}" class="delete">
           delete
         </a>
        {% endif %}
     </div>
+    </div>
 {% endfor %}
 
 <br>
     
-
     <form action="" method="POST">
         {% csrf_token %}
-        <input type="text" name="body" placeholder="type comment...">
-        <!-- <textarea name="body" placeholder="type comment..."></textarea> -->
-        <button type="submit" id="submit-comment"
-        {% if not request.user.is_authenticated %} disabled {% endif %}
-        >
+        <div class="comment-input-section">
+        <img src="{{ user.avatar.url }}" alt="" style="width: 2.5em; height: 2.5em;">
+        <textarea name="body" id=""  placeholder="type comment..." class="comment-input"></textarea>
+
+        <button type="submit" id="submit-comment">
             <span class="material-icons md-light">send</span>
         </button>
+    </div>
     </form>
   
     <br>

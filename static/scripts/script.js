@@ -50,3 +50,9 @@ submitComment = document.getElementById('submit-comment')
 submitComment.addEventListener('click', (e)=> {
     e.preventDefault()
 })
+
+
+  
+
+
+

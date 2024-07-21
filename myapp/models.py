@@ -36,7 +36,7 @@ class User(AbstractUser):
 
 class Comment(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    collection = models.ForeignKey(Collections, on_delete=models.CASCADE)  # Corrected field name
+    collection = models.ForeignKey(Collections, on_delete=models.CASCADE) 
     body = models.TextField()
     created = models.DateField(auto_now_add=True)
 
