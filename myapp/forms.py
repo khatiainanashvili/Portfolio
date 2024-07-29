@@ -2,7 +2,7 @@ from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.forms import ModelForm
 
-from .models import Collections, Illustration, Tools, User
+from .models import Collections, Illustration, Tools, User, Video
 
 
 class CollectionForm(ModelForm):
@@ -13,7 +13,12 @@ class CollectionForm(ModelForm):
 class IllustrationForm(forms.ModelForm):
     class Meta:
         model = Illustration
-        fields = ['image', 'tool']
+        fields = ['image', 'tool', 'collection']
+        widgets = {
+            'collection': forms.Select(attrs={'required': False}),
+        }
+
+
 
 
 class ToolsForm(ModelForm):
@@ -37,3 +42,8 @@ class CollectionUpdateForm(ModelForm):
     class Meta: 
         model = Collections 
         fields = '__all__'
+
+class VideoForm(forms.ModelForm):
+    class Meta:
+        model = Video
+        fields = ['file', 'name', 'illustration']

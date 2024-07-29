@@ -1,0 +1,21 @@
+{% extends 'main.html' %}
+{% load static %}
+{% block title %} <title>Delete Illustration</title> {% endblock %}
+
+{% block content %}
+<div class="delete-container">
+
+         <form method="POST" action="" class="delete_item-form">
+            {% csrf_token %}
+              <p>
+                R U sure, you want to delete This Item ?
+              </p>
+              <input type="submit" class="add-file-btn" value="Delete">
+        </form>
+       
+        <a href="{% url 'motions' %}" class="go-back">
+          <span class="material-icons md-light">arrow_back</span>
+            Go Back
+        </a>
+</div>       
+{% endblock %}

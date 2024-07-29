@@ -22,7 +22,7 @@
           </li>
 
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="{% url 'contact' %}">ʚɞ Contact ʚɞ</a>
+            <a class="nav-link active" aria-current="page" href="{% url 'motions' %}">ʚɞ Motions ʚɞ</a>
           </li>
 
           {% if request.user.is_authenticated %}
@@ -43,7 +43,7 @@
 
             <div class="dropdown-menu">
            
-              <a  href="{% url 'update' %}">settings <span class="material-icons md-light">psychology</span></a>
+              <a  href="{% url 'update' %}">settings <span class="material-icons md-light">manage_accounts</span></a>
           
               <a  href="{% url 'logout' %}">LogOut <span class="material-icons md-light">logout</span></a>
           

@@ -9,17 +9,35 @@
 
 {% block content %}
 
-
+<div class="profile_page">
 <button class="add-file-btn">
-    <a href="{% url 'add' %}">
-        Add new Item
+    <a href="{% url 'add' %}" style="display: flex; justify-content: center; align-items: center; gap: 1rem;">
+        Add New Collection
+        <span class="material-icons md-light" >perm_media</span>
     </a>
 </button>
 
 <button class="add-file-btn">
-    <a href="{% url 'update' %}">
+    <a href="{% url 'add_illustration' %}" style="display: flex; justify-content: center; align-items: center; gap: 1rem;">
+        Add New Item
+        <span class="material-icons md-light" >image</span>
+    </a>
+</button>
+
+<button class="add-file-btn">
+    <a href="{% url 'add_video' %}" style="display: flex; justify-content: center; align-items: center; gap: 1rem;">
+        Add New Motion
+        <span class="material-icons md-light" >animation</span>
+    </a>
+</button>
+
+<button class="add-file-btn">
+    <a href="{% url 'update' %}" style="display: flex; justify-content: center; align-items: center; gap: 1rem;">
         Update profile
+        <span class="material-icons md-light">manage_accounts</span>
     </a>
 </button>
+
+</div>
 
 {% endblock %}

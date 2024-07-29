@@ -21,8 +21,33 @@
         {% endblock %}
 
     
+        <script>
+
+            const panels = document.querySelectorAll(".panel");
+            let intervalId;
+            
+            
+            document.addEventListener("DOMContentLoaded", function() {
+                if (panels.length > 0) {
+                    panels[0].classList.add('active');
+                }
+            });
+            
+            panels.forEach(element =>{
+                element.addEventListener('click',()=>{
+                      removeActiveClases()
+                      element.classList.add("active")
+                })
+            })
+            
+            function removeActiveClases() {
+                 panels.forEach(element => {
+                    element.classList.remove("active")
+                 });
+            }
+               </script>
         
-        <script src="{% static 'scripts/script.js' %}"></script>
+   <script src="{% static 'scripts/script.js' %}"></script>
        
 
     </body>

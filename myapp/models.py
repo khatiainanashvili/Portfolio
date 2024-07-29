@@ -1,6 +1,6 @@
 from django.db import models # type: ignore
 from django.contrib.auth.models import AbstractUser # type: ignore
-
+from django.core.validators import FileExtensionValidator
 
 class Collections(models.Model):
     name = models.CharField(max_length=200)
@@ -22,11 +22,21 @@ class Illustration(models.Model):
     name = models.CharField(max_length=200)
     description = models.TextField(blank=True, null=True)
     tool = models.ForeignKey(Tools, on_delete=models.CASCADE)
-    collection = models.ForeignKey(Collections, related_name='illustrations', on_delete=models.CASCADE)
+    collection = models.ForeignKey(Collections, related_name='illustrations', on_delete=models.CASCADE, null=True, blank=True)
 
     def __str__(self):
         return f"{self.name} _ {self.tool} _ {self.description}"
     
+    
+class Video(models.Model):
+    file = models.FileField(upload_to='videos/', validators=[FileExtensionValidator(allowed_extensions=['mp4', 'mov', 'avi'])])
+    name = models.CharField(max_length=200)
+    description = models.TextField(blank=True, null=True)
+    illustration = models.ForeignKey(Illustration, related_name='videos', on_delete=models.CASCADE)
+
+
+    def __str__(self):
+        return self.name
 
 class User(AbstractUser):
     collections = models.ManyToManyField(Collections, blank= True, related_name="myapp_user")

@@ -1,0 +1,38 @@
+{% extends 'main.html' %}   
+
+{% load static %}
+
+{% block title %} 
+<title>Profile</title> 
+{% endblock %}
+
+{% block content %}
+<div class="add-new-item">
+
+    <a href="{% url 'profile' request.user.id  %}" class="close-btn">
+        <img src=" {% static 'files/icons/close.svg' %} " alt="">
+    </a>
+<form action="" method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+
+    <div class="illustration-field">
+        <label for="illustration">Upload Illustration</label>
+        <br>
+        {{ illustration_form.image }}
+    </div>
+
+    <div class="illustration-field">
+        <label for="tools">Tools</label>
+        <input type="text" name="tools" list="tools-list">
+        <datalist id="tools-list">
+            {% for tool in tools %}
+            <option value="{{ tool.name }}">{{ tool.name }}</option>
+            {% endfor %}
+        </datalist>
+    </div>
+    <br>
+    <input type="submit" value="Create New Item">
+</form>
+
+</div>
+{% endblock %}

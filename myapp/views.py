@@ -1,11 +1,11 @@
 from functools import wraps
 from django.shortcuts import render, redirect, get_object_or_404 # type: ignore
 from django.http import HttpResponse, HttpResponseForbidden # type: ignore
-from .models import User, Illustration, Collections, Tools, Comment
+from .models import User, Illustration, Collections, Tools, Comment, Video
 from django.db.models import Q # type: ignore
 from django.contrib.auth import authenticate, login, logout # type: ignore
 from django.contrib.auth.decorators import login_required # type: ignore
-from .forms import CollectionForm, CollectionUpdateForm, IllustrationForm, ToolsForm, UserCreationForm, UserForm
+from .forms import CollectionForm, CollectionUpdateForm, IllustrationForm, ToolsForm, UserCreationForm, UserForm, VideoForm
 from .seeder import seeder_func
 from django.contrib import messages
 # Create your views here.
@@ -196,6 +196,58 @@ def add_collection(request):
 
     context = {'form': form, 'illustration_form': illustration_form, 'tools': tools, 'collections': collections}
     return render(request, 'myapp/add_collection.html', context)
+
+
+@superuser_required
+def add_illustration(request):
+    illustration_form = IllustrationForm()
+    tools = Tools.objects.all()
+    
+    if request.method == 'POST':
+        illustration_image = request.FILES.get('image')
+        illustration_tool_name = request.POST.get('tools')
+        tool, created = Tools.objects.get_or_create(name=illustration_tool_name)
+        
+        new_illustration = Illustration(
+            image=illustration_image,
+            tool=tool,
+            
+        )
+        new_illustration.save()
+
+        return redirect('illustrations')
+
+    context = {'illustration_form': illustration_form, 'tools': tools}
+    return render(request, 'myapp/add_illustration.html', context)
+
+@superuser_required
+def add_video(request):
+    video_form = VideoForm()
+    if request.method == 'POST':
+        video_form = VideoForm(request.POST, request.FILES)
+        if video_form.is_valid():
+            video_form.save()
+            return redirect('motions') 
+    context = {'video_form': video_form}
+    return render(request, 'myapp/add_motions.html', context)
+
+
+def video_list(request):
+    videos = Video.objects.all()
+    return render(request, 'myapp/motions.html', {'videos': videos})
+
+
+@superuser_required
+def delete_video(request, id):
+    video = Video.objects.get(id=id)
+    user = request.user
+    if request.method == 'POST':
+        video.file.delete()
+        video.delete()
+        return redirect('motions')
+    return render(request, "myapp/delete_video.html", {'video': video, "user": user})
+
+
 
 
 @login_required

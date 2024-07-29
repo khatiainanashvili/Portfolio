@@ -15,10 +15,14 @@
 <div class="illustartor">
   <img src=" {% static 'files/icons/khatia.png' %} " alt="khatia" class="khatia">
   <img src=" {% static 'files/icons/1.gif' %} " alt="khatia" class="firefly">
+  <div class="main-description">
+    <img src=" {% static 'files/icons/art.gif' %} " alt="khatia" class="plant plant1">
   <h5>
     Explore my unique digital illustrations, where my creativity and artistry come to life through vivid visuals and captivating designs
   </h5>
- 
+
+
+</div>
 </div>    
       <ul class="carucell" >
        {% for collection in favorite_collections %}
@@ -49,7 +53,11 @@
            {% endfor %}
       </ul>
 
-        
+
+      
    </div>    
+
+
+   
    
 {% endblock %}
