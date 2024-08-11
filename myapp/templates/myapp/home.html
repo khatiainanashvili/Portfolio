@@ -7,6 +7,8 @@
 
 
 
+
+
 {% block content %}
 
   
@@ -33,7 +35,6 @@
             <li class="container">
               {% for illustration in collection.illustrations.all %}
                 <div class="panel " style="background-image: url({{illustration.image.url}}) ;">
-                    <h3>{{ illustration.tools.all }}</h3>
                 </div>
               {% endfor %}
             </li>
@@ -59,5 +60,5 @@
 
 
    
-   
+   {% include 'footer.html' %}
 {% endblock %}

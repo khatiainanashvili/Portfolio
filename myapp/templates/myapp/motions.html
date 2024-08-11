@@ -6,9 +6,9 @@
 
 {% block content %}
 
-<div class="grid-container">
+<div class="grid-container motions">
     {% for video in videos %}
-
+    <div class="" style="display: flex; flex-direction: column;">
             <video controls class="grid-item">
                 <source src="{{ video.file.url }}" type="video/mp4" >
                 Your browser does not support the video tag.
@@ -20,7 +20,7 @@
             </a>
            </button>
            {% endif %}
-              
+          </div>    
 
     {% endfor %}
 </div>

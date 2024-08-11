@@ -8,9 +8,30 @@ from django.contrib.auth.decorators import login_required # type: ignore
 from .forms import CollectionForm, CollectionUpdateForm, IllustrationForm, ToolsForm, UserCreationForm, UserForm, VideoForm
 from .seeder import seeder_func
 from django.contrib import messages
+from django.core.mail import send_mail
 # Create your views here.
 
 def home(request):
+
+    if request.method == 'POST':
+        name = request.POST.get('full-name')
+        email = request.POST.get('email')
+        subject = request.POST.get('subject')
+        message = request.POST.get('message')
+
+        data = {
+            'name':name,
+            'email': email,
+            'subject':subject,
+            'message': message
+        }
+        
+        message = '''
+         New Message: {}
+         From: {}
+
+'''.format(data['message'], data['email'])
+        send_mail(data['subject'], message, '', ['khatia.inanashvili.2@gmail.com'])
     favorite_collections = Collections.objects.filter(is_favorite=True)[:3]
     
     seeder_func()
@@ -44,6 +65,7 @@ def illustration_detail(request, id):
 
 def collections_list(request):
     collections = Collections.objects.all()
+
     return render(request, 'myapp/collections_list.html', {'collections': collections})
 
 
@@ -295,3 +317,4 @@ def update_collection(request, collection_id):
         'new_illustration_form': new_illustration_form,
         'collection': collection
     })
+
