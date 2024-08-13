@@ -21,7 +21,7 @@ class Illustration(models.Model):
     image = models.ImageField(upload_to='illustrations/')
     name = models.CharField(max_length=200)
     description = models.TextField(blank=True, null=True)
-    tool = models.ForeignKey(Tools, on_delete=models.CASCADE)
+    tool = models.ForeignKey(Tools, related_name='tool',on_delete=models.CASCADE)
     collection = models.ForeignKey(Collections, related_name='illustrations', on_delete=models.CASCADE, null=True, blank=True)
 
     def __str__(self):
