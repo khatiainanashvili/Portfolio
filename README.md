@@ -1,6 +1,6 @@
 # Personal Illustration Portfolio Website
 
-This project is a personal illustration portfolio website, where I showcase my artwork and designs. I have developed the front-end, back-end, and handled the UI/UX design to create a seamless experience for showcasing my illustrations, tools, and collections.
+This project is a personal illustration portfolio website, where I showcase my artwork and designs. I have developed the front-end, back-end, and handled the UI/UX design to create a seamless experience for showcasing my Art.
 
 ## Table of Contents
 - [Features](#features)
