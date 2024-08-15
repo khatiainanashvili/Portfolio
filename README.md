@@ -40,7 +40,6 @@ This project is a personal illustration portfolio website, where I showcase my a
 - **Frontend**: HTML, CSS, JavaScript (with Django templates)
 - **Database**: SQLite (default, can be swapped with PostgreSQL or MySQL)
 - **Authentication**: Custom User model extending Django's `AbstractUser`
-- **Deployment**: Instructions for Vercel deployment
 
 ## Installation
 
