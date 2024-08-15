@@ -12,7 +12,7 @@
 </form>
 <div class="tools-list">
 {% for tool in tools %}
-  <a href="{{request.path}}?query={{tool.name}}"><h5> {{ tool.name }} {{ tools.collection.count }}</h5>
+  <a href="{{request.path}}?query={{tool.name}}"><h5> {{ tool.name }} ( {{ tool.tool.count }} )</h5>
   </a>
 
 

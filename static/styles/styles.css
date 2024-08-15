@@ -624,6 +624,8 @@ video {
     display: flex;
     justify-content: center;
     gap: 1.5em;
+    font-size: 1.5rem;
+    color: #fff !important;
     
 }
 .delete-container{
