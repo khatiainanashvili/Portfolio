@@ -35,19 +35,21 @@
                
                
           <div class="dropdown">
+            <div class="">
 
-            <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false" >
+            <a href="{% url 'profile' request.user.id %}">
               <img src="{{ request.user.avatar.url }}" alt="" style="width: 2.5em; height: 2.5em; border-radius: 100%;">
+            </a>  
+            <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false" >
               <p>{{request.user.username}} <span class="material-icons md-light">arrow_drop_down</span> </p>
             </a>
+          </div>
 
             <div class="dropdown-menu">
            
               <a  href="{% url 'update' %}">settings <span class="material-icons md-light">manage_accounts</span></a>
           
               <a  href="{% url 'logout' %}">LogOut <span class="material-icons md-light">logout</span></a>
-          
-          
               
             </div>
 
