@@ -47,3 +47,6 @@ class VideoForm(forms.ModelForm):
     class Meta:
         model = Video
         fields = ['file', 'name', 'illustration']
+        widgets = {
+            'illustration': forms.Select(attrs={'required': False}),
+        }

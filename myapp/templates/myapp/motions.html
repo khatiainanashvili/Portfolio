@@ -14,8 +14,8 @@
                 Your browser does not support the video tag.
             </video>
             {% if request.user.is_superuser %}
-           <button class="delete">
-            <a href="{% url 'delete_video' video.id %}">
+           <button class="delete" style="width: 10rem;">
+            <a href="{% url 'delete_video' video.id %}" >
                 Delete video
             </a>
            </button>

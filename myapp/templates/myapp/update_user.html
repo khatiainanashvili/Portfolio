@@ -7,6 +7,8 @@
 {% endblock %}
 
 {% block content %}
+
+<div class="" style=" color: aquamarine;">
    
 <a href="{{ request.META.HTTP_REFERER }}">Go Back To Home</a>
 
@@ -18,8 +20,8 @@
             {{ field }}
         </div>
     {% endfor %}
-    <input type="submit" value="Update Profile">
+    <input type="submit" value="Update Profile" class="add-file-btn" style="margin-top: 2rem; color: aquamarine;">
 </form>
 
-
+</div>
 {% endblock %}

@@ -7,53 +7,28 @@
 
 {% block content %}
         
+            <div class="register-container add-new-item" style="flex-direction: column; margin-bottom: 0; width: 50em; height: 40em; margin-top: 7em; padding: 2em;">
 
-         <div class="frame">
-                {% if messages %}
-
-                <ul style="color: red;">
-                 {% for message in messages %}
-                  <li>
-                   {{ message }}
-                  </li>
-                 {% endfor %}
-                </ul>
-    
-                {% endif %}
-   
-             <a href="{% url 'home' %}" class="close-btn">
-                  <img src=" {% static 'files/icons/close.svg' %} " alt="">
-              </a>
-   
-             <div class="login">Register</div>
-             <div>
-                   <form method="POST" action="">
-                       {% csrf_token %}
-                       
-                <div class="email">
-                    <input type="text" name="username" placeholder="Username">
-                    <span class="material-icons md-light">person</span>
+                <a href="{% url 'home' %}" class="close-btn">
+                     <img src=" {% static 'files/icons/close.svg' %} " alt="">
+                 </a>
+      
+                <h1>Register Page</h1>
+                <div>
+                      <form method="POST" action="">
+                          {% csrf_token %}
+                          {{ form.as_p }}
+      
+                         <input type="submit" value="Register" class="add-file-btn" style=" background-color: rgb(123, 35, 122);">
+      
+                         <br><br>
+                          <p>Already signed up?</p>
+                          <a href="{% url 'login' %}">Login</a>
+                      </form>
                 </div>
-               
-                <div class="password">
-                    <input type="password" name="password" placeholder="Pasword">
-                    <span class="material-icons md-light">password</span>
-                </div>
-
-                <div class="password">
-                    <input type="password" name="password" placeholder="Pasword">
-                    <span class="material-icons md-light">password</span>
-                </div>
-         
-                      <input type="submit" value="Register" class="log">
-         
-                      <br><br>
-                       <p>Already signed up?</p>
-                       <a href="{% url 'login' %}">Login</a>
-                   </form>
-             </div>
+      
+               </div>
    
-            </div>
 
 
 {% endblock %}
