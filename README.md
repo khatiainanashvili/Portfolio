@@ -38,7 +38,7 @@ This project is a personal illustration portfolio website, where I showcase my a
 
 - **Backend**: Django
 - **Frontend**: HTML, CSS, JavaScript (with Django templates)
-- **Database**: SQLite (default, can be swapped with PostgreSQL or MySQL)
+- **Database**: SQLite 
 - **Authentication**: Custom User model extending Django's `AbstractUser`
 
 ## Installation
